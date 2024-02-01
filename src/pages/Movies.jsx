@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { fetchMovies, getGenres } from '../store';
-import { onAuthStateChanged } from 'firebase/auth';
-import { firebaseAuth } from '../utils/firebase-config';
-import styled from 'styled-components';
-import Navbar from '../components/Navbar';
-import Slider from '../components/Slider';
-import NotAvailable from '../components/NotAvailable';
-import SelectGenre from '../components/SelectGenre';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { fetchMovies, getGenres } from "../store";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "../utils/firebase-config";
+import styled from "styled-components";
+import Navbar from "../components/Navbar";
+import Slider from "../components/Slider";
+import NotAvailable from "../components/NotAvailable";
+import SelectGenre from "../components/SelectGenre";
+import Footer from "../components/Footer";
 
 export default function Movies() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,29 +25,30 @@ export default function Movies() {
   }, []);
 
   useEffect(() => {
-    if(genresLoaded) dispatch(fetchMovies({  type: 'movies' }));
-  },[genresLoaded])
+    if (genresLoaded) dispatch(fetchMovies({ type: "movies" }));
+  }, [genresLoaded]);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
-    return () => (window.onscroll = null)
-  }
+    return () => (window.onscroll = null);
+  };
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     // if(currentUser) navigate('/')
-  })
+  });
   return (
     <Container>
       <div className="navbar">
         <Navbar isScrolled={isScrolled} />
       </div>
-      
+
       <div className="data">
-      <SelectGenre genres={genres} type="movie" />
+        <SelectGenre genres={genres} type="movie" />
         {movies.length ? <Slider movies={movies} /> : <NotAvailable />}
       </div>
+      <Footer />
     </Container>
-  )
+  );
 }
 
 const Container = styled.div`

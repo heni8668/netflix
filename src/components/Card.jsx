@@ -121,7 +121,7 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
               <div className="controls flex">
                 <IoPlayCircleSharp
                   title="Play"
-                  onClick={() => navigate("/player")}
+                  onClick={() => handleClick(movieData)}
                 />
                 <RiThumbUpFill title="Like" />
                 <RiThumbDownFill title="Dislike" />

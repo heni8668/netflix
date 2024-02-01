@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchMovies, getGenres } from "../store";
 import SelectGenre from "../components/SelectGenre";
 import Slider from "../components/Slider";
+import Footer from "../components/Footer";
 
 function TVShows() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -58,6 +59,7 @@ function TVShows() {
           </h1>
         )}
       </div>
+      <Footer />
     </Container>
   );
 }

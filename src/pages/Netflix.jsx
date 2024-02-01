@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar';
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
 import styled from "styled-components";
-import backgroundImage from "../assets/home.jpg";
+import backgroundImage from "../assets/test.jpg";
 import MovieLogo from "../assets/homeTitle.webp";
 import { FaPlay } from "react-icons/fa";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchMovies, getGenres } from '../store';
-import Slider from '../components/Slider';
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovies, getGenres } from "../store";
+import Slider from "../components/Slider";
+import Footer from "../components/Footer";
 
 export default function Netflix() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,30 +24,29 @@ export default function Netflix() {
   }, [dispatch]);
 
   useEffect(() => {
-    if(genresLoaded) dispatch(fetchMovies({  type: 'all' }));
-  },[genresLoaded])
+    if (genresLoaded) dispatch(fetchMovies({ type: "all" }));
+  }, [genresLoaded]);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
-    return () => (window.onscroll = null)
-  }
+    return () => (window.onscroll = null);
+  };
 
   // console.log(movies);
   return (
-    
-
     <Container>
-      <Navbar isScrolled = {isScrolled} />
+      <Navbar isScrolled={isScrolled} />
 
       <div className="hero">
-      <img
+        <img
           src={backgroundImage}
           alt="background"
           className="background-image"
         />
         <div className="container">
           <div className="logo">
-            <img src={MovieLogo} alt="Movie Logo" />
+            <p>fistful of vengeance</p>
+            {/* <img src={MovieLogo} alt="Movie Logo" /> */}
           </div>
           <div className="buttons flex">
             <button
@@ -61,16 +61,16 @@ export default function Netflix() {
               More Info
             </button>
           </div>
-          </div>
+        </div>
       </div>
       <Slider movies={movies} />
+      <Footer />
     </Container>
-  )
+  );
 }
 
-
 const Container = styled.div`
-background-color: black;
+  background-color: black;
   .hero {
     position: relative;
     .background-image {
@@ -84,10 +84,13 @@ background-color: black;
       position: absolute;
       bottom: 5rem;
       .logo {
-        img {
-          width: 100%;
-          height: 100%;
+        p {
+          /* width: 100%;
+          height: 100%; */
           margin-left: 5rem;
+          text-transform: capitalize;
+          font-weight: 600;
+          font-size: xx-large;
         }
       }
       .buttons {
@@ -117,4 +120,4 @@ background-color: black;
       }
     }
   }
-`
+`;
